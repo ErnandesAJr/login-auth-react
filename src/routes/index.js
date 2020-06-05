@@ -1,7 +1,11 @@
 import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
+import { isAuthenticated } from "../auth";
+import { ConnectedRouter } from "connected-react-router";
+import Main from "../pages/Main";
+import Profile from "../pages/Profile";
+import history from "./history";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { isAuthenticated } from "./auth";
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -16,11 +20,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 );
 
 const Routes = () => (
-  <BrowserRouter>
+  <ConnectedRouter history={history}>
     <Switch>
-      <Route exact path="/" component={() => <h1>Eita veio aqui</h1>} />
+      <Route exact path="/" component={Main} />
+      <Route exact path="/profile" component={Profile} />
       <PrivateRoute path="/app" component={() => <h1> OMG chegou</h1>} />
     </Switch>
-  </BrowserRouter>
+  </ConnectedRouter>
 );
 export default Routes;
