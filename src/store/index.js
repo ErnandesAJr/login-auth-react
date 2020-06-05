@@ -8,10 +8,7 @@ const middlewares = [routerMiddleware(history), thunk];
 
 const store = createStore(
   createRootReducer(history),
-  compose(
-    applyMiddleware(...middlewares)
-  )
+  compose(applyMiddleware(...middlewares))
 );
-
 
 export default store;

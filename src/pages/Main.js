@@ -1,13 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as AuthActions from "../store/actions";
+import * as UserActions from "../store/actions/user";
 
 //Must be a login class
-const Main = ({ signIn }) => (
+
+const Main = ({ signIn, dispatch }) => (
   <div>
     <h1> Main </h1>
-    <button onClick={signIn}>Entrar</button>
+    <button onClick={() => signIn("Maria", "Bonita", "Email", "Token")}>
+      Entrar
+    </button>
   </div>
 );
 
-export default connect(null, AuthActions)(Main);
+export default connect(null, UserActions)(Main);

@@ -1,5 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
 
-const Profile = () => <h1>Profile</h1>;
+const Profile = ({ user }) => (
+  <div>
+    <strong>Nome {user.name}</strong>
+    <br />
+    <strong>Avatar {user.avatar}</strong>
+    <br />
+    <strong>Token {user.token}</strong>
+    <br />
+    <strong>Email {user.email}</strong>
+  </div>
+);
 
-export default Profile;
+export default connect((state) => ({
+  user: state.user,
+}))(Profile);
