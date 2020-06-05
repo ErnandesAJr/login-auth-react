@@ -8,6 +8,6 @@ const Main = ({ signIn }) => (
     <h1> Main </h1>
     <button onClick={signIn}>Entrar</button>
   </div>
-)
+);
 
-export default connect(null, AuthActions)(Main)
+export default connect(null, AuthActions)(Main);

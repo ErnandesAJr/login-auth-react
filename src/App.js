@@ -5,7 +5,7 @@ import store from "~/store";
 
 const App = () => (
   <Provider store={store}>
-    <Routes></Routes>;
+    <Routes></Routes>
   </Provider>
 );
 export default App;
