@@ -24,21 +24,22 @@ export default createReducer(INITIAL_STATE, HANDLERS);
  * These are the actions that can be called by the components
  */
 export const Creators = {
-  singIn: (name, avatar, email, token) => (dispatch) => {
+  singIn: (email, password) /*=> (dispatch)*/ => {
     /**
      * Simulating a login request and if successful it redirects you to another page
      */
-    new Promise((resolve) =>
-      setTimeout(() => {
-        dispatch(push("/profile"));
-        dispatch({
-          type: Types.SIGN_IN,
-          name,
-          avatar,
-          email,
-          token,
-        });
-      }, 3000)
-    );
+    // new Promise((resolve) =>
+    // setTimeout(() => {
+    // dispatch(push("/profile"));
+    // dispatch({
+    return {
+      type: "user/SAGASIGN_IN",
+      email,
+      password,
+    };
+    // });
+    // }
+    // , 3000)
+    // );
   },
 };

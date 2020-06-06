@@ -4,11 +4,19 @@ import { Creators as UserActions } from "../store/ducks/user";
 
 //Must be a login class
 
-const Main = ({ singIn }) => (
+const Login = ({ singIn, user }) => (
   <div>
     <h1> Main </h1>
-    <button onClick={() => singIn("Maria", "Bonita", "Email")}>Entrar</button>
+    <button onClick={() => singIn("mariabonita@email.com", "as212312")}>
+      Entrar
+    </button>
+    <h1>{user.name}</h1>
   </div>
 );
 
-export default connect(null, UserActions)(Main);
+export default connect(
+  (state) => ({
+    user: state.user,
+  }),
+  UserActions
+)(Login);
