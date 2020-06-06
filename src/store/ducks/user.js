@@ -25,6 +25,9 @@ export default createReducer(INITIAL_STATE, HANDLERS);
  */
 export const Creators = {
   singIn: (name, avatar, email, token) => (dispatch) => {
+    /**
+     * Simulating a login request and if successful it redirects you to another page
+     */
     new Promise((resolve) =>
       setTimeout(() => {
         dispatch(push("/profile"));

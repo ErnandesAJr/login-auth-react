@@ -7,9 +7,7 @@ import { Creators as UserActions } from "../store/ducks/user";
 const Main = ({ singIn }) => (
   <div>
     <h1> Main </h1>
-    <button onClick={() => singIn("Maria", "Bonita", "Email", "Token")}>
-      Entrar
-    </button>
+    <button onClick={() => singIn("Maria", "Bonita", "Email")}>Entrar</button>
   </div>
 );
 
