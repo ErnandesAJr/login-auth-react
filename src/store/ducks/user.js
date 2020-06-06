@@ -12,7 +12,16 @@ export const Types = {
  */
 const singIn = (state = INITIAL_STATE, action) => {
   const { email, name, token, avatar } = action;
-  return { ...state, email, name, token, avatar };
+  /**
+   * There may be a variable that is an array
+   */
+  return {
+    ...state,
+    email,
+    name,
+    token,
+    avatar,
+  };
 };
 
 const error = (state = INITIAL_STATE, action) => {
