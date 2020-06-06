@@ -1,13 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
-import * as UserActions from "../store/actions/user";
+import { Creators as UserActions } from "../store/ducks/user";
 
 //Must be a login class
 
-const Main = ({ signIn, dispatch }) => (
+const Main = ({ singIn }) => (
   <div>
     <h1> Main </h1>
-    <button onClick={() => signIn("Maria", "Bonita", "Email", "Token")}>
+    <button onClick={() => singIn("Maria", "Bonita", "Email", "Token")}>
       Entrar
     </button>
   </div>
