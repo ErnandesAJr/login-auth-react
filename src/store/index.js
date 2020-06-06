@@ -1,3 +1,6 @@
+/**
+ * It serves to connect the reducers with my routes. That way I can redirect pages through redux.
+ */
 import { routerMiddleware } from "connected-react-router";
 import { applyMiddleware, createStore, compose } from "redux";
 /**
