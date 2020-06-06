@@ -1,10 +1,10 @@
 import { push } from "connected-react-router";
 import { createReducer } from "reduxsauce";
 
-const INITIAL_STATE = { name: null, email: null, token: null, avatar: null };
+const INITIAL_STATE = {};
 export const Types = {
   SIGN_IN: "user/SIGN_IN",
-  // LOG_OFF: "user/LOG_OFF",
+  ERROR: "user/ERROR",
 };
 
 /**
@@ -15,8 +15,14 @@ const singIn = (state = INITIAL_STATE, action) => {
   return { ...state, email, name, token, avatar };
 };
 
+const error = (state = INITIAL_STATE, action) => {
+  const { status, message } = action;
+  return { status, message };
+};
+
 export const HANDLERS = {
   [Types.SIGN_IN]: singIn,
+  [Types.ERROR]: error,
 };
 export default createReducer(INITIAL_STATE, HANDLERS);
 

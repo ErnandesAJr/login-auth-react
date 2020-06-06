@@ -10,7 +10,7 @@ const Login = ({ singIn, user }) => (
     <button onClick={() => singIn("mariabonita@email.com", "as212312")}>
       Entrar
     </button>
-    <h1>{user.name}</h1>
+    {user.name ? <h1>{user.name}</h1> : <h1>{user.message}</h1>}
   </div>
 );
 

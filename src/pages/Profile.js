@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 const Profile = ({ user }) => (
   <div>
+    <h1>É TRETAAAAAA É TRETAAAAAA</h1>
     <strong>Nome {user.name}</strong>
     <br />
     <strong>Avatar {user.avatar}</strong>
