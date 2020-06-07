@@ -1,6 +1,12 @@
 {
   "name": "login-auth",
   "version": "0.1.0",
+  "description": "A complete template for Login React",
+  "author": {
+    "name": "Ernandes Azevedo",
+    "email": "eandesjunior@hotmail.com",
+    "url": "https://github.com/ErnandesAJr"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
