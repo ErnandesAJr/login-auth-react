@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Creators as UserActions } from "../store/ducks/user";
+import { Creators as UserActions } from "~/store/ducks/user";
 
 //Must be a login class
 

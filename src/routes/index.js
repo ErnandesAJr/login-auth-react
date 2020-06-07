@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { isAuthenticated } from "../auth";
 import { ConnectedRouter } from "connected-react-router";
-import Login from "../pages/Login";
-import Profile from "../pages/Profile";
+import Login from "../pages/Login/index";
+import Profile from "../pages/Profile/index";
 import history from "./history";
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
