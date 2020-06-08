@@ -10,6 +10,7 @@ const api = new LoginApi();
 export const { Types, Creators } = createActions({
   signIn: ["email", "password"],
   signOut: [],
+  forgotPassword: ["email"],
 });
 const INITIAL_STATE = {};
 
@@ -18,7 +19,7 @@ function* sendResquestLogin(action) {
     /**
      * If the login is successful, update the user data and redirect him to the next page
      */
-    const response = yield call(api.loginPost, action.email, action.name);
+    const response = yield call(api.loginPost, action.email, action.password);
     const { name, email, token, avatar } = response;
     yield put(push("/profile"));
     yield put({ type: "user/SUCESS", name, email, avatar, token });
@@ -34,8 +35,12 @@ function* sendResquestLogin(action) {
   }
 }
 
-function* clearDataUser(action) {
-  console.log("entrou");
+function* redirectUserForget(action) {
+  yield put(push("/forget"));
+  yield put({ type: "user/Forgot_Password" });
+}
+
+function* redirectUserLogOff(action) {
   yield put(push("/"));
   yield put({ type: "user/SIGN_OUT" });
 }
@@ -46,16 +51,16 @@ const signOutUser = (state = INITIAL_STATE, action) => {
 
 const signInUser = (state = INITIAL_STATE, action) => {
   const { email, name, token, avatar } = action;
-  /**
-   * There may be a variable that is an array
-   */
   return {
-    ...state,
     email,
     name,
     token,
     avatar,
   };
+};
+
+const forgetUser = (state = INITIAL_STATE, action) => {
+  return action.email ? { email: action.email } : {};
 };
 
 const errorRequest = (state = INITIAL_STATE, action) => {
@@ -64,12 +69,14 @@ const errorRequest = (state = INITIAL_STATE, action) => {
 };
 
 export const login = takeLatest([Types.SIGN_IN], sendResquestLogin);
-export const logoff = takeLatest([Types.SIGN_OUT], clearDataUser);
+export const logoff = takeLatest([Types.SIGN_OUT], redirectUserLogOff);
+export const forgotPassword = takeLatest([Types.SIGN_OUT], redirectUserForget);
 
 export const HANDLERS = {
   "user/SUCESS": signInUser,
   "user/ERROR": errorRequest,
   "user/SIGN_OUT": signOutUser,
+  "user/Forgot_Password": forgetUser,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);

@@ -8,11 +8,12 @@ class Login {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const user = {
-          name: "Maria Bonita",
-          email: "mariabonita@email.com",
-          token: "es0546504eq98as489asd5naksbdah01",
-          avatar: "uma foto bonita da maria",
+          name: email.split("@")[0],
+          email: email,
+          token: `${password}troll`,
+          avatar: `uma foto bonita dx ${email.split("@")[0]}`,
         };
+
         resolve(user);
         // const error = {
         //   status: "503",
@@ -24,7 +25,6 @@ class Login {
   }
 
   isAuthenticated = () => {
-    // You must check if the token is in the localstorage to know if it is authenticated or not
     return false;
   };
 }
