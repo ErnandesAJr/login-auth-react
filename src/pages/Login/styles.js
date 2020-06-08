@@ -15,7 +15,8 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   background-color: #cbdee9;
-  border-radius: 10px;
+  box-shadow: 0.3px 0.3px #082a68;
+  border-radius: 25px;
 
   img {
     height: 150px;
@@ -44,7 +45,6 @@ export const Form = styled.form`
     box-shadow: 2px 3px #ddd;
     &::placeholder {
       color: #999;
-      border-radius: 10px;
     }
   }
 
