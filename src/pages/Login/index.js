@@ -1,51 +1,56 @@
 import { Creators as UserActions } from "~/store/ducks/user";
 import Logo from "~/assets/images/eitalasqueira.png";
 import { Form, Container } from "./styles";
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
-class Login extends Component {
-  state = {
-    email: this.props.user.email ? this.props.user.email : "",
-    password: "",
-    error: "",
-  };
+function Login({ user, signIn }) {
+  const [email, setEmail] = useState(user.email ? user.email : "");
+  const [password, setPassword] = useState("");
+  const [messageError, setMessageError] = useState("");
+  const [location, setLocation] = useState({});
 
-  handleSignIn = async (e) => {
-    e.preventDefault();
-    const { email, password } = this.state;
-    if (!email || !password) {
-      this.setState({ error: "Preencha a todos os dados" });
-    } else {
-      this.props.signIn(email, password);
-    }
-  };
+  useEffect(() => {
+    const watchId = navigator.geolocation.watchPosition(handleLocation);
+    return () => navigator.geolocation.clearWatch(watchId);
+  }, []);
 
-  render() {
-    const { email, error } = this.state;
-    return (
-      <Container>
-        <Form onSubmit={this.handleSignIn}>
-          <img src={Logo} alt="Eita Lasqueira logo" />
-          {error && <p>{error}</p>}
-          {this.props.user.message && <p>{this.props.user.message}</p>}
-          <input
-            type="email"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => this.setState({ email: e.target.value })}
-          />
-          <input
-            type="password"
-            placeholder="Senha"
-            onChange={(e) => this.setState({ password: e.target.value })}
-          />
-          <button type="submit">Entrar</button>
-          {/* <hr /> */}
-        </Form>
-      </Container>
-    );
+  function handleLocation({ coords }) {
+    const { latitude, longitude } = coords;
+    setLocation({ latitude, longitude });
   }
+
+  function handleSignIn(e) {
+    e.preventDefault();
+    if (!email || !password) {
+      setMessageError("Preencha a todos os dados");
+    } else {
+      signIn(email, password, location);
+    }
+  }
+
+  return (
+    <Container>
+      <Form onSubmit={handleSignIn}>
+        <img src={Logo} alt="Eita Lasqueira logo" />
+        {messageError && <p>{messageError}</p>}
+        {user.message && <p>{user.message}</p>}
+        <input
+          type="email"
+          placeholder="E-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Senha"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Entrar</button>
+        {/* <hr /> */}
+      </Form>
+    </Container>
+  );
 }
 
 export default connect(
