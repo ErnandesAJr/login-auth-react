@@ -5,10 +5,12 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
 function Login({ user, signIn }) {
-  const [email, setEmail] = useState(user.email ? user.email : "");
-  const [password, setPassword] = useState("");
   const [messageError, setMessageError] = useState("");
   const [location, setLocation] = useState({});
+  const [login, setLogin] = useState({
+    email: user.email ? user.email : "",
+    password: "",
+  });
 
   useEffect(() => {
     const watchId = navigator.geolocation.watchPosition(handleLocation);
@@ -22,10 +24,10 @@ function Login({ user, signIn }) {
 
   function handleSignIn(e) {
     e.preventDefault();
-    if (!email || !password) {
+    if (!login.email || !login.password) {
       setMessageError("Preencha a todos os dados");
     } else {
-      signIn(email, password, location);
+      signIn(login.email, login.password, location);
     }
   }
 
@@ -38,13 +40,13 @@ function Login({ user, signIn }) {
         <input
           type="email"
           placeholder="E-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={login.email}
+          onChange={(e) => setLogin({ ...login, email: e.target.value })}
         />
         <input
           type="password"
           placeholder="Senha"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => setLogin({ ...login, password: e.target.value })}
         />
         <button type="submit">Entrar</button>
         {/* <hr /> */}
